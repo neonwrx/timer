@@ -117,6 +117,11 @@ button:-moz-focusring,
   outline: 1px dotted ButtonText;
 }
 
+button {
+  cursor: pointer;
+  outline: none;
+}
+
 fieldset {
   padding: 0.35em 0.75em 0.625em;
 }

@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import TimerButton from './TimerButton';
+import ListItem from './ListItem';
 
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
@@ -8,35 +9,43 @@ export default function App() {
   const [listItems, setListItems] = useState([]);
   const [active, setActive] = useState(null);
 
-  function addItem(item) {
+  const addItem = item => {
     setListItems([...listItems, item]);
-  }
+  };
 
-  function onItemPress(item) {
+  const removeItems = () => {
+    setListItems([]);
+  };
+
+  const onItemPress = item => {
     const index = listItems.indexOf(item);
     const newList = listItems.slice(0, index + 1);
     setListItems(newList);
     setActive(index);
     buttonRef.current.pauseTimer(listItems[index]);
-  }
+  };
 
   return (
     <div className="App">
-      <TimerButton ref={buttonRef} addItem={item => addItem(item)} />
-      <TransitionGroup className="items">
-        {listItems.map((item, index) => (
-          <CSSTransition key={item.ms} timeout={500} classNames="item">
-            <div>
-              <button
-                className={`item-enter__btn ${active === index && 'active'} `}
-                onClick={() => onItemPress(item)}
-              >
-                {item.formattedTime}
-              </button>
-            </div>
-          </CSSTransition>
-        ))}
-      </TransitionGroup>
+      <h2>Test Timer</h2>
+      <div className="wrapper">
+        <TimerButton
+          ref={buttonRef}
+          addItem={item => addItem(item)}
+          removeItems={removeItems}
+        />
+        <TransitionGroup className="items">
+          {listItems.map((item, index) => (
+            <CSSTransition key={item.ms} timeout={500} classNames="item">
+              <ListItem
+                active={active === index}
+                onItemPress={onItemPress}
+                item={item}
+              />
+            </CSSTransition>
+          ))}
+        </TransitionGroup>
+      </div>
     </div>
   );
 }

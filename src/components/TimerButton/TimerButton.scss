@@ -1,0 +1,60 @@
+.buttons-wrap {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  .timer-btn {
+    border: 1px solid $base-color;
+    width: 13rem;
+    text-align: center;
+    padding: $btn-padding;
+    font-weight: bold;
+    font-size: 1.25rem;
+    margin-right: 1.25rem;
+    background-color: $base-color;
+    color: $timer-text-color;
+    text-transform: uppercase;
+    position: relative;
+    overflow: hidden;
+    background-position: center;
+    border-radius: $btn-border-radius;
+    transition: background 0.8s;
+    margin-bottom: 1rem;
+
+    &:hover {
+      background: $timer-hover-bg-color
+        radial-gradient(circle, transparent 1%, $timer-hover-bg-color 1%)
+        center/15000%;
+    }
+    &:active {
+      background-color: $timer-active-bg-color;
+      background-size: 100%;
+      transition: background 0s;
+    }
+  }
+
+  @media screen and (max-width: 350px) {
+    .timer-btn {
+      margin-right: 0;
+    }
+  }
+
+  .reset-btn {
+    font-weight: bold;
+    font-size: 1.25rem;
+    padding: $btn-padding;
+    text-align: center;
+    background-color: $active-color;
+    border: 1px solid $active-color;
+    border-radius: $btn-border-radius;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    color: $timer-text-color;
+
+    &:hover {
+      background: $reset-hover-bg-color
+        radial-gradient(circle, transparent 1%, $reset-hover-bg-color 1%)
+        center/15000%;
+    }
+  }
+}
